@@ -1,0 +1,24 @@
+{
+  "name": "zipkin-axios-example",
+  "version": "1.0.0",
+  "description": "Example to demonstrate distributed-tracing using express and zipkin.",
+  "main": "back1.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andre Uschmann <mail@andre-uschmann.de> (http://andre-uschmann.de)",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "random-name": "^0.1.2",
+    "zipkin": "^0.6.1",
+    "zipkin-context-cls": "^0.6.1",
+    "zipkin-instrumentation-axios": "^0.1.0",
+    "zipkin-instrumentation-express": "^0.6.2",
+    "zipkin-transport-http": "^0.6.1"
+  }
+}
