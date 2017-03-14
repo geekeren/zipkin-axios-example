@@ -53,30 +53,35 @@ const client = wrapAxios(axios, {tracer, serviceName: config.serviceName});
 app.get('/sequence', (req, res) => {
   let fullname = '';
   tracer.writeIdToConsole();
-  client.get('http://localhost:3001/firstname')
-  .then(result => {
-    fullname += result.data;
-    client.get('http://localhost:3002/lastname')
-    .then((result) => {
-      fullname += ' ' + result.data;
-      res.send(`Hello ${fullname}`);
+  tracer.scoped(() => {
+    client.get('http://localhost:3001/firstname')
+    .then(result => {
+      fullname += result.data;
+      client.get('http://localhost:3002/lastname')
+      .then((result) => {
+        fullname += ' ' + result.data;
+        res.send(`Hello ${fullname}`);
+      })
+      .catch(err => {
+        console.log(err)
+
+      });
     })
     .catch(err => {
       console.log(err)
-
     });
-  })
-  .catch(err => {
-    console.log(err)
   });
 });
 
 app.get('/chain', (req, res) => {
   tracer.writeIdToConsole();
-  client.get('http://localhost:3001/fullname')
-  .then(result => {
-    res.send(`hello ${result.data}`);
+  tracer.scoped(() => {
+    client.get('http://localhost:3001/fullname')
+    .then(result => {
+      res.send(`hello ${result.data}`);
+    });
   });
+
 });
 
 // start express server
